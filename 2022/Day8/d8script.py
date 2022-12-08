@@ -9,7 +9,7 @@ def extract(file):
     f = open(file,'r').read().split('\n')
     f = [list(i) for i in f]
     f = aoc.str_to_int_conv(f)
-    return np.array(f)
+    return f
 
 
 def is_exterior(x,y,xmax,ymax):
