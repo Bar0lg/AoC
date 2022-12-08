@@ -12,7 +12,7 @@ def extract(file):
         
 
 def main(file):
-    data = AOC.str_to_int_conv(extract(file)) 
+    data = aoc.str_to_int_conv(extract(file)) 
 
     #Part 1
     Cal_per_elves = [sum(i) for i in data]
