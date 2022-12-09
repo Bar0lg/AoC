@@ -107,7 +107,6 @@ def main(file):
     for i in p2_sol:
         if i >= NEED_FREE - (SYSTEM_SIZE - (max(p2_sol))):
             res.append(i)
-    print("Solution Part 2:%s" %(min(res)))
 
 if __name__ == "__main__":
     main(sys.argv[1])

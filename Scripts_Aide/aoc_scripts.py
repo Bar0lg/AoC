@@ -104,3 +104,27 @@ def create_ens(tab):
 def print_dicts(dict):
     for i in dict:
         print('%s : %s'%(i,dict[i]))
+
+def print_grid(xmax,ymax,tab):
+    print('\n')
+    for y in range(-ymax,ymax+1):
+        for x in range(-xmax,xmax+1):
+            if (x,y) == (0,0):
+                print('S',end='')
+            elif (x,-y) in tab:
+                print('X',end='')
+            else:
+                print('.',end='')
+        print('\n')
+
+
+def create_spe_coo(tab1,tab2,banned=[]):
+    res = []
+    for i in tab1:
+        for j in tab2:
+            if (i,j) not in banned:
+                res.append(((i,j)))
+    return res
+
+def add_coo(coo1,coo2):
+    return (coo1[0] + coo2[0],coo1[1] + coo2[1])
