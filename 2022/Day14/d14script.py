@@ -5,7 +5,6 @@ import aoc_scripts as aoc
 
 def extract(file):
     f = open(file,'r').read().split('\n')
-    print_file = open('printfile.txt','w')
     data = [i.split('->') for i in f]
     data = aoc.str_to_int_conv(aoc.deep_split(data,','))
     return data
@@ -61,7 +60,6 @@ def main(file,part):
         dict_rocks[rock[0]][rock[1]] = True
     res = 0
     while True:
-        dict_copy = copy.deepcopy(dict_rocks)
         sand = (500,0)
         while True:
             if sand[0] not in dict_rocks:
