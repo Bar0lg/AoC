@@ -47,6 +47,10 @@ def clean_str(string,elemes,option=0):
 
 
 def clean_tab (tab,elemes,option=0):
+    """
+    0 = Remove elmes
+    1 = Remove ALL but elemes
+    """
     res = []
     for i in tab:
         if type(i) == list:
@@ -105,10 +109,10 @@ def print_dicts(dict):
     for i in dict:
         print('%s : %s'%(i,dict[i]))
 
-def print_grid(xmax,ymax,tab):
+def print_grid(xmin,ymin,xmax,ymax,tab):
     print('\n')
-    for y in range(-ymax,ymax+1):
-        for x in range(-xmax,xmax+1):
+    for y in range(ymin,ymax+1):
+        for x in range(xmin,xmax+1):
             if (x,y) == (0,0):
                 print('S',end='')
             elif (x,-y) in tab:
@@ -128,3 +132,51 @@ def create_spe_coo(tab1,tab2,banned=[]):
 
 def add_coo(coo1,coo2):
     return (coo1[0] + coo2[0],coo1[1] + coo2[1])
+
+
+def deep_split(tab,spliter):
+    res = []
+    for i in tab:
+        if type(i) == list:
+            res.append(deep_split(i,spliter))
+        else:
+            res.append(i.split(spliter))
+    return res
+
+
+def deep_command(tab,command):
+    res = []
+    for i in tab:
+        if type(i) == list:
+            res.append(deep_command(i,command))
+        else:
+            res.append(command(i))
+    return res
+
+
+def find_in_2D_grid(tab,elem):
+    res = []
+    for i in range(len(tab)):
+        for j in range(len(tab[0])):
+            if tab[i][j] == elem:
+                res.append((i,j))
+    return res
+
+def flat_list(tab):
+    res = []
+    for i in tab:
+        if isinstance(i,list):
+            res += flat_list(i)
+        else:
+            res += [i]
+    return res
+
+def cut_list(tab,min_x,max_x,min_y,max_y):
+    res = [tab[i][min_y:max_y] for i in range(min_x,max_x)]
+    return res
+
+def comp_dict(dict1,dict2):
+    for i in dict1:
+        for k in dict1[i]:
+            if k not in dict2[i]:
+                print(i,k)
