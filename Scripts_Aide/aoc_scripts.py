@@ -69,7 +69,7 @@ def clean_tab (tab,elemes,option=0):
 
 def clean_all_but_int(stri):
 
-    num = int_to_str_conv(range(10))
+    num = int_to_str_conv(range(10)) + ['-']
     res = ''
     for i in stri:
         if i in num or i == ' ':
