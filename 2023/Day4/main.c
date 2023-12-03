@@ -1,14 +1,3 @@
-if !(test -d Day$1); then
-mkdir Day$1
-cd Day$1
-
-
-ln -s ../Autres/utils.c ./
-ln -s ../Autres/utils.h ./
-touch inputtest.txt
-touch input.txt
-
-cat > main.c << EOF
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -31,14 +20,14 @@ int main(int argc, char** argv){
         real_input = 1;
     }
     if (!real_input){
-        printf("Resultat du test pour jour $1:\n");
+        printf("Resultat du test pour jour 4:\n");
         int res1 = part1(TEST_FILENAME);
         printf("Resultat part 1: %d\n",res1);
         int res2 = part2(TEST_FILENAME);
         printf("Resultat part 2: %d\n",res2);
     }
     else{
-        printf("Resultat de l'input pour jour $1:\n");
+        printf("Resultat de l'input pour jour 4:\n");
         int res1 = part1(INPUT_FILENAME);
         printf("Resultat part 1: %d\n",res1);
         int res2 = part2(INPUT_FILENAME);
@@ -46,14 +35,3 @@ int main(int argc, char** argv){
     }
     return 0;
 }
-EOF
-
-cat > Makefile << EOF
-
-CFLAGS = -Wall -Wextra -fsanitize=address,undefined -g
-
-all:
-	gcc \$(CFLAGS) -o BinDay$1 main.c utils.c
-EOF
-
-fi
