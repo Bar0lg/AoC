@@ -156,6 +156,14 @@ int** init_int_tab(int larg,int longe,int val){
     return res;
 }
 
+int* init_int_arr(int size, int val){
+    int* res = (int*)malloc(sizeof(int)*size);
+    for (int i=0;i<size;i++){
+        res[i] = val;
+    }
+    return res;
+}
+
 void print_int_arr(int* t, int size){
     for (int i=0;i<size;i++){
         printf("%d ",t[i]);

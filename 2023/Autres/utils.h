@@ -43,6 +43,7 @@ void free_linked_duo_list(linked_duo_list* l);
 void print_duo_list(linked_duo_list* l);
 
 int** init_int_tab(int larg,int longe,int val);
+int* init_int_arr(int size, int val);
 void print_int_arr(int* t, int size);
 void print_int_tab(int** t,int lg, int larg);
 void free_int_tab(int** t, int size);
