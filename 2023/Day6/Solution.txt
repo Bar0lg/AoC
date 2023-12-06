@@ -1,0 +1,6 @@
+Used a Calculator:
+
+find the zeros (there is 2) of (time - x)*x - distance
+
+The upper-bound value of the lowest ms you need to push the button
+The lower-bound value of the highest ms you need to push the button

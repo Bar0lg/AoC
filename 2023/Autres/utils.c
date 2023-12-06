@@ -17,6 +17,7 @@ int max_int(int i1,int i2){
     return i1;
 }
 
+
 int cmp_strings(char* str1, char* str2){
     int res = 0;
     int max = min_int(strlen(str1),strlen(str2));
@@ -57,20 +58,11 @@ int is_in(char* grand, char* petit){
     return res;
 }
 
-int str_contain(char c, char* all_chars,int include){
+int str_contain(char c, char* all_chars){
     int res = 0;
     int n = strlen(all_chars);
-    if (include){
-        for (int i=0;i<n;i++){
-            res = res || (c == all_chars[i]);
-        }
-    }
-    else
-    {
-        res = 1;
-        for (int i=0;i<n;i++){
-            res = res && (c != all_chars[i]);
-        }
+    for (int i=0;i<n;i++){
+        res = res || (c == all_chars[i]);
     }
     return res;
 }
@@ -94,6 +86,9 @@ linked_list* rev_linked(linked_list* l){
 }
 
 void free_linked_list(linked_list* l){
+    if (l == NULL){
+        return;
+    }
     if (l->next != NULL){
         free_linked_list(l->next);
     }
@@ -130,6 +125,9 @@ linked_duo_list* rev_linked_duo(linked_duo_list* l){
 }
 
 void free_linked_duo_list(linked_duo_list* l){
+    if (l == NULL){
+        return;
+    }
     if (l->next != NULL){
         free_linked_duo_list(l->next);
     }
@@ -192,4 +190,67 @@ int get_first (int super_num){
 }
 int get_second (int super_num){
     return super_num & 0xFFFF;
+}
+
+dict* init_dict(int size){
+    dict* res = malloc(sizeof(dict));
+    res->size = size;
+    linked_duo_list** res_table = (linked_duo_list**)calloc(size,sizeof(linked_duo_list*));
+    res->table = res_table;
+    return res;
+}
+
+void free_dict(dict* dico){
+    for (int i=0;i<dico->size;i++){
+        free_linked_duo_list(dico->table[i]);
+    }
+    free(dico->table);
+    free(dico);
+}
+
+int exists(dict* dico,long key){
+    linked_duo_list* index = dico->table[(key % dico->size)];
+    while (index){
+        if (index->val.x == key){
+            return TRUE;
+        }
+        index = index->next;
+    }
+    return FALSE;
+}
+
+long find(dict* dico, long key){
+    linked_duo_list* index = dico->table[(key % dico->size)];
+    while (index){
+        if (index->val.x == key){
+            return index->val.y;
+        }
+        index = index->next;
+    }
+    return -99999;
+}
+
+void replace(dict* dico, long key, long val){
+    linked_duo_list* index = dico->table[(key % dico->size)];
+    while (index){
+        if (index->val.x == key){
+            index->val.y = val;
+        }
+        index = index->next;
+    }
+
+}
+
+void add_to(dict* dico, long key,long val){
+    linked_duo_list* index = dico->table[(key % dico->size)];
+    duo d = {.x= key,.y = val};
+    dico->table[(key % dico->size)] = cons_duo(d, index);
+}
+
+void add_replace(dict* dico,long key, long val){
+    if (exists(dico, key)){
+        replace(dico, key, val);
+    }else{
+        add_to(dico, key, val);
+    }
 }

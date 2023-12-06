@@ -12,7 +12,7 @@ int cmp_strings(char* str1, char* str2);
 int equal_strings(char* str1, char* str2);
 int start_with(char* grand, char* petit);
 int is_in(char* grand, char* petit);
-int str_contain(char c, char* all_chars,int include);
+int str_contain(char c, char* all_chars);
 
 
 typedef struct linked_list{
@@ -52,4 +52,18 @@ void free_int_tab(int** t, int size);
 long two_to_one(int i1,int i2);
 int get_first (int super_num);
 int get_second (int super_num);
+
+typedef struct {
+    linked_duo_list** table;
+    int size;
+} dict;
+
+dict* init_dict(int size);
+void free_dict(dict* dico);
+int exists(dict* dico,long key);
+long find(dict* dico, long key);
+void replace(dict* dico, long key, long val);
+void add_to(dict* dico, long key,long val);
+void add_replace(dict* dico,long key, long val);
+
 #endif
